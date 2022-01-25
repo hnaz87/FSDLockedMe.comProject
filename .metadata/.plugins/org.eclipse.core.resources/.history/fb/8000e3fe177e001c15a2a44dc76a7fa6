@@ -187,7 +187,6 @@ public static void main(String[] args)throws IOException
 			     }
 		     System.out.println("success");
 		     file.close();
-		     subOptions();
 		     
 		    
 		 	}
@@ -195,7 +194,6 @@ public static void main(String[] args)throws IOException
 		 	{
 		 		System.out.println(errorMessage);
 		 		subOptions();
-		 		
 		 		
 		 	}
 		 	
@@ -222,12 +220,12 @@ public static void main(String[] args)throws IOException
 		     	System.out.println("file does not exist");
 		     
 		 	}
-	      subOptions();
+	     subOptions();
 	 	}
 	 	catch(Exception ex)
 	 	{
 	 		System.out.println(errorMessage);
-	 		
+	 		System.exit(0);
 	 	}
 	 	
 	 obj.close();

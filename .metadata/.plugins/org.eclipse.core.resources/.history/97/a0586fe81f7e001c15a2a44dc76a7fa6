@@ -194,7 +194,6 @@ public static void main(String[] args)throws IOException
 		 	catch(Exception ex)
 		 	{
 		 		System.out.println(errorMessage);
-		 		subOptions();
 		 		
 		 		
 		 	}
