@@ -1,0 +1,255 @@
+package mypackage;
+import java.util.*;
+import java.io.*;
+
+public class LockedMe {
+	
+	
+	
+   static final String projectFilespath="C:\\Users\\Administrator\\eclipse-workspace\\LockedMe.com\\TextFiles";
+   static final String errorMessage="An unexpected error happened. Please contact the admin@Lockedme.com";
+   
+  public static void mainMenu()
+  {
+	  Scanner obj = new Scanner(System.in);
+	  
+		
+		try
+		{
+		while(true)
+		{
+		System.out.println("\n Would you like to try the options given below?");
+		System.out.println("\n 1.View \n 2.File Operations \n 3.Exit \n");
+		int option= Integer.parseInt(obj.nextLine());
+		switch (option)
+      {
+      case 1: viewFiles();
+      break;
+      case 2: System.out.println("******************************");
+              subMenu();
+             
+           
+      break;
+              
+              
+      case 3: exit();
+      default:System.out.println("Invalid choice");
+      }
+	    
+	    
+		}
+		
+		}
+		catch(Exception ex)
+		{
+		
+      }
+      finally
+      {
+      	obj.close();
+      }
+  }
+  
+  public static void subMenu()
+  {
+	  Scanner obj = new Scanner(System.in);
+      int suboption=1;
+      try
+      {
+	  //while(suboption!=4)
+     // {
+      System.out.println("\n 1-Add a file\n 2-Delete a file \n 3-Search a file\n 4.-Back to Main Menu");
+      suboption=obj.nextInt();
+      switch(suboption)
+      {
+      case 1: addFile();
+      break;
+      case 2: deleteFile(); 
+      break;
+      case 3: SearchFile();
+      break;
+    
+      case 4:System.out.println("return to main");
+             mainMenu();
+      break;
+      
+      }
+      
+      //}
+      }
+      catch(Exception ex)
+      {
+    	  System.out.println(errorMessage);
+      }
+    obj.close();
+    
+  }
+	
+	
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+		/**Welcome Screen of LockedMe.com*/
+		
+		
+		System.out.println("===============================================================================");
+
+		System.out.println("\t\t\t \b Welcome to LockeMe.com");
+		
+		System.out.println("===============================================================================");
+		System.out.println("\t\t *********** created by Hina Naz.************\n\n\n\n");
+		
+		System.out.println("\t\t#### How about getting to know about LockedMe.com ####\n\n\n");
+		System.out.println("-------------------------------------------------------------------------------");
+
+		mainMenu();
+		
+		
+		
+        }
+	
+            
+            //Menu options
+            
+            public static void viewFiles() 
+            {  
+            	
+            	System.out.println("Thanks for choosing option 1\n");
+            	try
+            
+            
+            {
+                
+                File folder= new File(projectFilespath);
+                File[] listOfFiles=folder.listFiles();
+                
+                
+                if(listOfFiles.length==0)
+                {	
+                 System.out.println("No files Exist in Directory");
+                }
+                else
+                {
+                	
+                System.out.println("The files in ascending order are: \n");
+                for(var l:listOfFiles)
+                {
+                	
+                	System.out.println(l.getName());
+                	
+                }
+                mainMenu();
+            }
+                
+            }
+                	
+            catch(Exception ex)
+            {
+            
+            System.out.println(errorMessage);
+            }
+}   
+            
+            public static void  exit()
+            {
+                System.out.println("Thanks for using the application Lockedme.com \n");
+                System.exit(0);
+            }
+            public static void  addFile()
+            {
+            	Scanner obj=new Scanner(System.in);
+            	try
+            	{
+                System.out.println("Enter the file name to be added \n");
+                String filename;
+                int linescount;
+                
+                filename= obj.nextLine();
+                System.out.println("Enter  the lines to be written in the file");
+                linescount=Integer.parseInt(obj.nextLine());
+                FileWriter file= new FileWriter(projectFilespath+"\\"+filename);
+                System.out.println("Enter  the text to be written in the file");
+                for(int i=0;i<linescount;i++)
+                {
+                	
+                	file.write(obj.nextLine()+"\n");
+                }
+                System.out.println("success");
+                file.close();
+                
+               
+            	}
+            	catch(Exception ex)
+            	{
+            		System.out.println(errorMessage);
+            	}
+            	
+               
+            }
+            public static void  deleteFile()
+            {
+            	Scanner obj=new Scanner(System.in);
+            	try
+            	{
+                System.out.println("Enter the file name to be deleted \n");
+                String filename;
+                
+                filename= obj.nextLine();
+                File file= new File(projectFilespath+"\\"+filename);
+                if(file.exists())
+                {	
+                	file.delete();
+                    System.out.println("File deleted successfully");
+                }
+                else
+                {
+                	System.out.println("file does not exist");
+                
+                
+            	}
+            	}
+            	catch(Exception ex)
+            	{
+            		System.out.println(errorMessage);
+            	}
+            	
+            	 
+            	  }
+            public static void  SearchFile()
+            {
+
+            	Scanner obj=new Scanner(System.in);
+            	try
+            	{
+                System.out.println("Enter the file name to be searched \n");
+                String filename;
+                
+                filename= obj.nextLine();
+                File folder= new File(projectFilespath);
+                File[] listOfFiles=folder.listFiles();
+                LinkedList<String> filenames=new LinkedList<String>();
+                for(var l:listOfFiles)
+                	filenames.add(l.getName());
+               if(filenames.contains(filename))
+            	   System.out.println("File found");
+               else
+            	   System.out.println("file not found");
+            	}
+            	catch(Exception ex)
+            	{
+            		System.out.println(errorMessage);
+            	}
+            	
+                
+                
+
+            }
+            
+            
+            
+           
+            
+
+
+	}
+
+

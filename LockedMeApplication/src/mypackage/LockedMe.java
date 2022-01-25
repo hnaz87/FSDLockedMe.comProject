@@ -6,32 +6,94 @@ public class LockedMe {
 	
 	
 	
+   static final String projectFilespath="C:\\Users\\Administrator\\eclipse-workspace\\LockedMe.com\\TextFiles";
+   static final String errorMessage="An unexpected error happened. Please contact the admin@Lockedme.com";
+   
+  public static void mainOptions()
+  {
+	  Scanner obj = new Scanner(System.in);
+	  
+	   
+	    System.out.println("**************************************************************");
+		System.out.println("\n Explore the world of Information and Contribute to it!!!!! \n");
+		System.out.println("**************************************************************");
+		System.out.println("\n 1.Read Existing Pages \n 2.Make you own \n 3.Close  \n");
+		try
+		{
+		System.out.println("Enter your choice \n");
+		int option= obj.nextInt();
+		if(option == 1)
+		{
+			viewFiles();
+			mainOptions();
+		}
+		else if(option == 2)
+		{
+			subOptions();
+		
+		}
+		else if(option==3)
+		{
+			System.out.println("Thanks for using LockedMe.com.Plz visit again.");
+			System.exit(0);
+		}
+	     
+		}
+		catch(Exception ex)
+		{
+			System.out.println(errorMessage);
+		}
+		finally
+		{
+			obj.close();
+		}
+	   
+	
+  }
+  
+  public static void subOptions()
+  {
+	  Scanner obj = new Scanner(System.in);
+      
+			   
+		      System.out.println("\n 1-Add a file\n 2-Delete a file \n 3-Search a file\n 42-Back to Main Menu");
+		      try
+		      {
+		      System.out.println("\n Enter your choice :\n");
+		      int suboption=obj.nextInt();
+		      
+					      switch(suboption)
+					      {
+					      case 1: addFile();
+					              subOptions();
+					      break;
+					      case 2: deleteFile(); 
+					              subOptions();
+					      break;
+					      case 3: SearchFile();
+					              subOptions();
+					      break;
+					      case 4:System.out.println("returning to MainScreen");
+					             mainOptions();
+					             
+					      break;
+					      
+					      }
+		      
+		      
+      }
+      catch(Exception ex)
+      {
+    	  System.out.println(errorMessage);
+    	  
+      }
+       obj.close();
     
+  }
 	
-	public  static void printMenu(String[] options)
-	{
-		
-		System.out.println("\n Would you like to try the options given below?");
-        for (String option : options)
-        {
-        	
-            System.out.println(option);
-        }
-        System.out.print("\n Choose your option : ");
-    }
 	
-	public static void printSubMenu(String[] suboptions)
-	{
-		
-		System.out.println(" Try the options given below");
-        for (String suboption : suboptions)
-        {
-        	
-            System.out.println(suboption);
-        }
-        System.out.print("\n Choose your option : ");
-    }
-	public static void main(String[] args)throws IOException {
+public static void main(String[] args)throws IOException
+{
 		// TODO Auto-generated method stub
 		/**Welcome Screen of LockedMe.com*/
 		
@@ -41,153 +103,162 @@ public class LockedMe {
 		System.out.println("\t\t\t \b Welcome to LockeMe.com");
 		
 		System.out.println("===============================================================================");
-		System.out.println("\t\t *********** created by Hina Naz.************\n\n\n\n");
+		System.out.println("\t\t *********** developed by Hina Naz.************\n\n\n\n");
 		
 		System.out.println("\t\t#### How about getting to know about LockedMe.com ####\n\n\n");
 		System.out.println("-------------------------------------------------------------------------------");
-
-		
-		
-		String[] options = {"1- View Files ", "2- Operate on Files ", "3- Exit "};
-		
-		Scanner obj = new Scanner(System.in);
-		int option=1;
-		 
-     
         
-        while (option!=3)
-        {
-            printMenu(options);
-            try
-            {
-            option = obj.nextInt();
-            switch (option)
-            {
-            case 1: viewFiles();
-            break;
-            case 2: fileOperations(); 
-            break;
-            case 3: exit();
-            }
-        
-            }
-            catch (InputMismatchException ex)
-            {
-                System.out.println("Please enter an integer value between 1 and " + options.length);
-                obj.next();
-            }
-            catch (Exception ex)
-            {
-                System.out.println("An unexpected error happened. Please contact the admin@Lockedme.com");
-                obj.next();
-            }
-            finally
-            {
-            }
-        }
-	}
+		mainOptions();
+		
+		
+		
+		
+ }
+	
             
-            //Menu options
+     //Function to display the existing files in directory
+	 public static void viewFiles() 
+	 {  
+	            	
+	      System.out.println("Thanks for choosing option 1\n");
+	      try
+	      
+	      {
+	                
+			 File folder= new File(projectFilespath);
+			 File[] listOfFiles=folder.listFiles();
+	                
+	                
+	                if(listOfFiles.length==0)
+	                {	
+	                 System.out.println("No files Exist in Directory");
+	                }
+	                else
+	                {
+	                	
+	                System.out.println("The files in ascending order are: \n");
+	                for(var l:listOfFiles)
+	                {
+	                	
+	                	System.out.println(l.getName());
+	                	
+	                }
+	                
+	                
+	                }
+	                
+	      }
+	                	
+	   catch(Exception ex)
+	    {
+	            
+	       System.out.println(errorMessage);
+	       
+	    }
+	      
+	      
+	 }   
             
-            public static void viewFiles() 
-            {
-                System.out.println("Thanks for choosing option 1\n");
-                File folder= new File("C:\\Users\\Administrator\\eclipse-workspace\\LockedMe.com\\TextFiles");
-                File[] listOfFiles=folder.listFiles();
-                System.out.println("The files in ascending order are: \n");
-                
-                if(listOfFiles.length==0)
-                	
-                 System.out.println("No files Exist in Directory");
-                
-                for(var l:listOfFiles)
-                {
-                	
-                	System.out.println(l.getName());
-                	
-                }
-                	
-                
-            }
-           
-            public static void fileOperations()
-        	{
-            	System.out.println("Thanks for choosing option 2.You are now in SubMenu :\n");
-                System.out.println("******************************");
-               
-                String[] suboptions= {" 1-Add a file, 2-Delete a file , 3-Search a file, 4.-Back to Main Menu"};
-                System.out.println("******************************");
-                Scanner obj1 = new Scanner(System.in);
-                int suboption=1;
-                while (suboption!=4)
-                {
-                    printSubMenu(suboptions);
-                    try
-                    {
-                    suboption = obj1.nextInt();
-                    switch (suboption)
-                    {
-                    case 1: addFile();
-                    break;
-                    case 2: deleteFile(); 
-                    break;
-                    case 3: SearchFile();
-                    break;
-                    case 4 :System.out.println("Switching back to Main Menu"
-                            + ",Thank you ");
-                    break;
-                    
-                   
-                    
-                    
-                    }
-                
-                    }
-                    catch (InputMismatchException ex)
-                    {
-                        System.out.println("Please enter an integer value between 1 and " + suboptions.length);
-                        obj1.next();
-                    }
-                    catch (Exception ex)
-                    {
-                        System.out.println("An unexpected error happened. Please contact the admin@Lockedme.com");
-                        obj1.next();
-                    }
-                    finally
-                    {
-                    }
-        		
-            }
-        	}
-            public static void  exit()
-            {
-                System.out.println("Thanks for using the application Lockedme.com \n");
-                System.exit(0);
-            }
-            public static void  addFile()
-            {
-                System.out.println("Thanks for using the application Lockedme.com \n");
-                System.exit(0);
-            }
-            public static void  deleteFile()
-            {
-                System.out.println("Thanks for using the application Lockedme.com \n");
-                System.exit(0);
-            }
-            public static void  SearchFile()
-            {
-                System.out.println("Thanks for using the application Lockedme.com \n");
-                System.exit(0);
-            }
-            
-            
-            
-           
-
-
-
-
-
-	}
+	 //Function to create a file and add data to it       
+	 public static void  addFile()
+	 {
+		 	Scanner obj=new Scanner(System.in);
+		 	try
+		 	{
+		     System.out.println("Enter the file name to be added \n");
+		     String filename;
+		     int linescount;
+		     
+		     filename= obj.nextLine();
+		     System.out.println("Enter  the lines to be written in the file");
+		     linescount=Integer.parseInt(obj.nextLine());
+		     FileWriter file= new FileWriter(projectFilespath+"\\"+filename);
+		     System.out.println("Enter  the text to be written in the file");
+			     for(int i=0;i<linescount;i++)
+			     {
+			     	
+			     	file.write(obj.nextLine()+"\n");
+			     }
+		     System.out.println("success");
+		     file.close();
+		     
+		    
+		 	}
+		 	catch(Exception ex)
+		 	{
+		 		System.out.println(errorMessage);
+		 		subOptions();
+		 		
+		 	}
+		 	
+		    
+		    obj.close();
+	 }           
+ public static void  deleteFile()
+ {
+	 	Scanner obj=new Scanner(System.in);
+	 	try
+	 	{
+	     System.out.println("Enter the file name to be deleted \n");
+	     String filename;
+	     
+	     filename= obj.nextLine();
+	     File file= new File(projectFilespath+"\\"+filename);
+		     if(file.exists())
+		     {	
+		     	file.delete();
+		         System.out.println("File deleted successfully");
+		     }
+		     else
+		     {
+		     	System.out.println("file does not exist");
+		     
+		 	}
+	     subOptions();
+	 	}
+	 	catch(Exception ex)
+	 	{
+	 		System.out.println(errorMessage);
+	 		System.exit(0);
+	 	}
+	 	
+	 obj.close();
+ 	 
+ 	  }           
+	 public static void  SearchFile()
+	 {
+	
+		 	Scanner obj=new Scanner(System.in);
+		 	try
+		 	{
+		     System.out.println("Enter the file name to be searched \n");
+		     String filename;
+		     
+		     filename= obj.nextLine();
+		     File folder= new File(projectFilespath);
+		     File[] listOfFiles=folder.listFiles();
+		     LinkedList<String> filenames=new LinkedList<String>();
+			     for(var l:listOfFiles)
+				   filenames.add(l.getName());
+			    if(filenames.contains(filename))
+			 	   System.out.println("File found");
+			    else
+			 	   System.out.println("file not found");
+		    subOptions();
+		 	}
+		 	catch(Exception ex)
+		 	{
+		 		System.out.println(errorMessage);
+		 		System.exit(0);
+		 	}
+		 	
+	     
+	     obj.close();
+	     
+	     
+	
+	 }
+  
+ 	}
 
 
